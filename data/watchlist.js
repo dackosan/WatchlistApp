@@ -1,4 +1,4 @@
-import db from "./database";
+import db from "./database.js";
 
 db.prepare(
   "CREATE TABLE IF NOT EXISTS watchlist (id INTEGER PRIMARY KEY AUTOINCREMENT, userId  INTEGER, movieId INTEGER, FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(movieId) REFERENCES movies(id))"

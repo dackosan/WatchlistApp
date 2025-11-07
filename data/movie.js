@@ -1,4 +1,4 @@
-import db from "./database";
+import db from "./database.js";
 
 db.prepare(
   "CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, year INTEGER, genre STRING)"
