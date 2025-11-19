@@ -1,8 +1,8 @@
 import db from "./database.js";
 
 db.prepare(
-  "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, email STRING, password STRING)"
-);
+  "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, email STRING UNIQUE, password STRING)"
+).run();
 
 export const getUsers = () => db.prepare("SELECT * FROM users").all();
 
