@@ -4,17 +4,19 @@ import {
   saveWatchlist,
   deleteWatchlist,
 } from "../data/watchlist.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  const userId = req.query.userId;
+router.get("/", authenticateToken, (req, res) => {
+  const userId = req.user.id;
   const list = getWatchlistByUser(userId);
   res.json(list);
 });
 
-router.post("/", (req, res) => {
-  const { userId, movieId } = req.body;
+router.post("/", authenticateToken, (req, res) => {
+  const userId = req.user.id;
+  const { movieId } = req.body;
 
   try {
     saveWatchlist(userId, movieId);
@@ -24,8 +26,9 @@ router.post("/", (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  deleteWatchlist(req.params.id);
+router.delete("/:id", authenticateToken, (req, res) => {
+  const id = req.params.id;
+  deleteWatchlist(id);
   res.json({ message: "Removed from watchlist" });
 });
 

@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
   res.json(movie);
 });
 
-router.post("/", (req, res) => {
+/*router.post("/", (req, res) => {
   const { title, year, genre } = req.body;
 
   if (!title || !year || !genre) {
@@ -52,6 +52,6 @@ router.delete("/:id", (req, res) => {
   deleteMovie(id);
 
   res.json({ message: "Movie deleted" });
-});
+});*/
 
 export default router;

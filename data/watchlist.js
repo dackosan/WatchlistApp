@@ -14,7 +14,14 @@ db.prepare(
 export const getWachtlists = () => db.prepare("SELECT * FROM watchlist").all();
 
 export const getWatchlistByUser = (userId) =>
-  db.prepare("SELECT * FROM watchlist WHERE userId = ?").all(userId);
+  db
+    .prepare(
+      `SELECT w.id as watchlistId, m.id as movieId, m.title, m.year, m.genre
+       FROM watchlist w
+       JOIN movies m ON w.movieId = m.id
+       WHERE w.userId = ?`
+    )
+    .all(userId);
 
 export const getWatchlistByMovie = (movieId) =>
   db.prepare("SELECT * FROM watchlist WHERE movieId = ?").all(movieId);
