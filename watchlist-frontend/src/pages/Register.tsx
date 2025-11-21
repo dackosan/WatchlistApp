@@ -5,10 +5,16 @@ import { register as registerRequest } from "../api/auth";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // új mező
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("A jelszavak nem egyeznek!");
+      return;
+    }
 
     try {
       await registerRequest(email, password);
@@ -35,6 +41,12 @@ export default function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+          />
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
           />
           <button type="submit">Create Account</button>
         </form>
