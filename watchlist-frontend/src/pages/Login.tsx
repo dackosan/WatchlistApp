@@ -47,7 +47,7 @@ export default function Login() {
         </form>
 
         <p className="small-text">
-          Nincs még fiókod? <Link to="/register">Regisztráció</Link>
+          Don't have an account ? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>

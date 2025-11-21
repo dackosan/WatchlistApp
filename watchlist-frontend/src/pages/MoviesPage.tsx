@@ -41,7 +41,7 @@ export default function MoviesPage() {
 
   return (
     <div className="page container">
-      <h1>Filmek</h1>
+      <h1>Films</h1>
       <div className="movies-grid">
         {movies.map((movie) => (
           <div className="movie-card" key={movie.id}>

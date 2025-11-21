@@ -40,7 +40,7 @@ export default function Register() {
         </form>
 
         <p className="small-text">
-          Már van fiókod? <Link to="/login">Bejelentkezés</Link>
+          Already have an account ? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>

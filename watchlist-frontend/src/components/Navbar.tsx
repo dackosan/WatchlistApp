@@ -24,13 +24,13 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-links">
-        <Link to="/movies">Filmek</Link>
+        <Link to="/movies">Films</Link>
         <Link to="/watchlist">Watchlist</Link>
       </div>
 
       {auth?.token && (
         <button className="navbar-logout" onClick={handleLogout}>
-          Logout
+          Log out
         </button>
       )}
     </nav>

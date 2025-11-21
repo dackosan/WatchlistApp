@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { getWatchlist, removeFromWatchlist } from "../api/watchlist";
 import { AuthContext } from "../context/authContext";
+import { FaTimes } from "react-icons/fa";
 
 interface Movie {
   id: number;
@@ -57,17 +58,27 @@ export default function WatchlistPage() {
 
   return (
     <div className="page container">
-      <h1>Saját Watchlist</h1>
-      {watchlist.length === 0 && <p>Nincs film a watchlistben.</p>}
-      <ul>
+      <h1>Personal Watchlist</h1>
+      {watchlist.length === 0 && <p>There is no film in your watchlist.</p>}
+
+      <div className="movies-grid">
         {watchlist.map((item) => (
-          <li key={item.id}>
-            <strong>{item.movie.title}</strong> ({item.movie.year}) -{" "}
-            {item.movie.genre}
-            <button onClick={() => handleRemove(item.id)}>Törlés</button>
-          </li>
+          <div className="movie-card" key={item.id}>
+            <div className="movie-content">
+              <h2>{item.movie.title}</h2>
+              <p>
+                {item.movie.year} - {item.movie.genre}
+              </p>
+            </div>
+            <button
+              className="delete-btn"
+              onClick={() => handleRemove(item.id)}
+            >
+              <FaTimes />
+            </button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
