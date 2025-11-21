@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { getMovies } from "../api/movies";
 import { addToWatchlist } from "../api/watchlist";
 import { AuthContext } from "../context/authContext";
+import { FaHeart } from "react-icons/fa";
 
 interface Movie {
   id: number;
@@ -39,18 +40,28 @@ export default function MoviesPage() {
   };
 
   return (
-    <div className="container">
+    <div className="page container">
       <h1>Filmek</h1>
-      <ul>
+      <div className="movies-grid">
         {movies.map((movie) => (
-          <li key={movie.id}>
-            <strong>{movie.title}</strong> ({movie.year}) - {movie.genre}{" "}
-            <button onClick={() => handleAddToWatchlist(movie.id)}>
-              Hozzáadás a watchlisthez
+          <div className="movie-card" key={movie.id}>
+            <div className="movie-content">
+              <h2>{movie.title}</h2>
+              <p>
+                {movie.year} - {movie.genre}
+              </p>
+            </div>
+            <button
+              className="heart-btn"
+              onClick={() => {
+                handleAddToWatchlist(movie.id);
+              }}
+            >
+              <FaHeart />
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

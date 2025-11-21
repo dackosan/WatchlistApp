@@ -24,13 +24,24 @@ export default function WatchlistPage() {
 
   const fetchWatchlist = async () => {
     if (!auth?.token) return;
+
     try {
       const res = await getWatchlist(auth.token);
-      setWatchlist(res.data);
+
+      const formatted = res.data.map((item: any) => ({
+        id: item.watchlistId,
+        movie: {
+          id: item.movieId,
+          title: item.title,
+          year: item.year,
+          genre: item.genre,
+        },
+      }));
+
+      setWatchlist(formatted);
     } catch (err) {
       console.error(err);
     }
-    console.log(watchlist);
   };
 
   const handleRemove = async (watchlistId: number) => {
@@ -45,7 +56,7 @@ export default function WatchlistPage() {
   };
 
   return (
-    <div className="container">
+    <div className="page container">
       <h1>Saját Watchlist</h1>
       {watchlist.length === 0 && <p>Nincs film a watchlistben.</p>}
       <ul>
