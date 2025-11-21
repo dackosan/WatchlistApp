@@ -39,7 +39,7 @@ export default function MoviesPage() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Filmek</h1>
       <ul>
         {movies.map((movie) => (

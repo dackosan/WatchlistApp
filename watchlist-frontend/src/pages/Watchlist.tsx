@@ -20,7 +20,7 @@ export default function WatchlistPage() {
 
   useEffect(() => {
     fetchWatchlist();
-  }, []);
+  }, [auth?.token]);
 
   const fetchWatchlist = async () => {
     if (!auth?.token) return;
@@ -30,6 +30,7 @@ export default function WatchlistPage() {
     } catch (err) {
       console.error(err);
     }
+    console.log(watchlist);
   };
 
   const handleRemove = async (watchlistId: number) => {
@@ -44,7 +45,7 @@ export default function WatchlistPage() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Saját Watchlist</h1>
       {watchlist.length === 0 && <p>Nincs film a watchlistben.</p>}
       <ul>

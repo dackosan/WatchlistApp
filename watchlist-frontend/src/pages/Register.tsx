@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register as registerRequest } from "../api/auth";
 
 export default function Register() {
@@ -20,26 +20,29 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="page-center">
+      <div className="container">
+        <h1>Register</h1>
+        <form onSubmit={handleRegister}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <button type="submit">Create Account</button>
+        </form>
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-
-        <button type="submit">Create Account</button>
-      </form>
+        <p className="small-text">
+          Már van fiókod? <Link to="/login">Bejelentkezés</Link>
+        </p>
+      </div>
     </div>
   );
 }
