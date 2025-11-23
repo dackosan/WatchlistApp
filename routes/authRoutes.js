@@ -31,7 +31,7 @@ router.post("/login", (req, res) => {
     expiresIn: "1d",
   });
 
-  res.json({ token });
+  res.json({ token, email: user.email });
 });
 
 export default router;

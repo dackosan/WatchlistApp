@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register as registerRequest } from "../api/auth";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // új mező
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("A jelszavak nem egyeznek!");
+      toast.error("Passwords do not match!");
       return;
     }
 
     try {
       await registerRequest(email, password);
-      alert("Sikeres regisztráció! Jelentkezz be.");
+      toast.success("Registration successful! Please log in.");
       navigate("/login");
     } catch (err: any) {
-      alert(err.response?.data?.error || "Registration failed");
+      toast.error(err.response?.data?.error || "Registration failed");
     }
   };
 
@@ -36,18 +37,21 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
+
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
+
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
           />
+
           <button type="submit">Create Account</button>
         </form>
 

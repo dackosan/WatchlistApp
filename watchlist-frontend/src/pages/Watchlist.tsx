@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { getWatchlist, removeFromWatchlist } from "../api/watchlist";
 import { AuthContext } from "../context/authContext";
 import { FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 interface Movie {
   id: number;
@@ -42,6 +43,7 @@ export default function WatchlistPage() {
       setWatchlist(formatted);
     } catch (err) {
       console.error(err);
+      toast.error("Failed to load watchlist.");
     }
   };
 
@@ -50,15 +52,19 @@ export default function WatchlistPage() {
 
     try {
       await removeFromWatchlist(auth.token, watchlistId);
+
       setWatchlist(watchlist.filter((item) => item.id !== watchlistId));
+
+      toast.success("Film removed from watchlist.");
     } catch (err: any) {
-      alert(err.response?.data?.error || "Hiba a törlésnél");
+      toast.error(err.response?.data?.error || "Failed to remove film.");
     }
   };
 
   return (
     <div className="page container">
       <h1>Personal Watchlist</h1>
+
       {watchlist.length === 0 && <p>There is no film in your watchlist.</p>}
 
       <div className="movies-grid">
@@ -70,6 +76,7 @@ export default function WatchlistPage() {
                 {item.movie.year} - {item.movie.genre}
               </p>
             </div>
+
             <button
               className="delete-btn"
               onClick={() => handleRemove(item.id)}

@@ -29,9 +29,12 @@ export default function Navbar() {
       </div>
 
       {auth?.token && (
-        <button className="navbar-logout" onClick={handleLogout}>
-          Log out
-        </button>
+        <div className="navbar-right">
+          <span className="navbar-email">Email: {auth.email}</span>
+          <button className="navbar-logout" onClick={handleLogout}>
+            Log out
+          </button>
+        </div>
       )}
     </nav>
   );

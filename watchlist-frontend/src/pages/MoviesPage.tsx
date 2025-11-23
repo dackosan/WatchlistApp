@@ -3,6 +3,7 @@ import { getMovies } from "../api/movies";
 import { addToWatchlist } from "../api/watchlist";
 import { AuthContext } from "../context/authContext";
 import { FaHeart } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 interface Movie {
   id: number;
@@ -25,17 +26,21 @@ export default function MoviesPage() {
       setMovies(res.data);
     } catch (err) {
       console.error(err);
+      toast.error("Failed to load movies!");
     }
   };
 
   const handleAddToWatchlist = async (movieId: number) => {
-    if (!auth?.token) return alert("Jelentkezz be!");
+    if (!auth?.token) {
+      toast.warn("Please log in first!");
+      return;
+    }
 
     try {
       await addToWatchlist(auth.token, movieId);
-      alert("Hozzáadva a watchlisthez!");
+      toast.success("Added to watchlist!");
     } catch (err: any) {
-      alert(err.response?.data?.error || "Hiba a hozzáadásnál");
+      toast.error(err.response?.data?.error || "Failed to add to watchlist");
     }
   };
 
@@ -53,9 +58,7 @@ export default function MoviesPage() {
             </div>
             <button
               className="heart-btn"
-              onClick={() => {
-                handleAddToWatchlist(movie.id);
-              }}
+              onClick={() => handleAddToWatchlist(movie.id)}
             >
               <FaHeart />
             </button>

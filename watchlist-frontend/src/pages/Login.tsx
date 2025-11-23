@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import { login as loginRequest } from "../api/auth";
+import { toast } from "react-toastify";
 import "../App.css";
 
 export default function Login() {
@@ -17,12 +18,13 @@ export default function Login() {
       const res = await loginRequest(email, password);
 
       if (auth) {
-        auth.login(res.data.token);
+        auth.login(res.data.token, res.data.email);
       }
 
+      toast.success("Successfully logged in!");
       navigate("/movies");
     } catch (err: any) {
-      alert(err.response?.data?.error || "Login failed");
+      toast.error(err.response?.data?.error || "Login failed");
     }
   };
 
