@@ -56,12 +56,14 @@ export default function MoviesPage() {
                 {movie.year} - {movie.genre}
               </p>
             </div>
-            <button
-              className="heart-btn"
-              onClick={() => handleAddToWatchlist(movie.id)}
-            >
-              <FaHeart />
-            </button>
+            {auth?.token && (
+              <button
+                className="heart-btn"
+                onClick={() => handleAddToWatchlist(movie.id)}
+              >
+                <FaHeart />
+              </button>
+            )}
           </div>
         ))}
       </div>

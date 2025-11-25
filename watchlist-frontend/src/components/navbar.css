@@ -21,7 +21,7 @@
 }
 
 .navbar-links {
-  margin-right: 36rem;
+  margin-right: 25rem;
 }
 
 .navbar-links a:hover {
@@ -76,4 +76,18 @@
   font-weight: 500;
   color: #ffffff;
   opacity: 0.9;
+}
+
+.navbar-btn {
+  background: #ffffff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #6200ee;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.navbar-btn:hover {
+  background: #d3b4ff;
 }

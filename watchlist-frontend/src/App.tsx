@@ -20,27 +20,16 @@ function App() {
     <>
       <Navbar />
       <ToastContainer />
+
       <Routes>
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRoute>
-              <MoviesPage />
-            </ProtectedRoute>
-          }
-        />
+        {/* PUBLIC PAGE */}
+        <Route path="/movies" element={<MoviesPage />} />
+
+        {/* AUTH PAGES */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRoute>
-              <MoviesPage />
-            </ProtectedRoute>
-          }
-        />
-
+        {/* PROTECTED PAGE */}
         <Route
           path="/watchlist"
           element={
@@ -50,6 +39,7 @@ function App() {
           }
         />
 
+        {/* DEFAULT REDIRECT */}
         <Route path="*" element={<Navigate to="/movies" />} />
       </Routes>
     </>

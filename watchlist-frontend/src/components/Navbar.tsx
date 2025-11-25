@@ -8,11 +8,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname === "/"
-  ) {
+  if (location.pathname === "/login" || location.pathname === "/register") {
     return null;
   }
 
@@ -25,17 +21,34 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-links">
         <Link to="/movies">Films</Link>
-        <Link to="/watchlist">Watchlist</Link>
+
+        {auth?.token && <Link to="/watchlist">Watchlist</Link>}
       </div>
 
-      {auth?.token && (
-        <div className="navbar-right">
-          <span className="navbar-email">Email: {auth.email}</span>
-          <button className="navbar-logout" onClick={handleLogout}>
-            Log out
-          </button>
-        </div>
-      )}
+      <div className="navbar-right">
+        {/* NOT LOGGED IN */}
+        {!auth?.token && (
+          <>
+            <Link className="navbar-btn" to="/login">
+              Login
+            </Link>
+            <Link className="navbar-btn" to="/register">
+              Register
+            </Link>
+          </>
+        )}
+
+        {/* LOGGED IN */}
+        {auth?.token && (
+          <>
+            <span className="navbar-email">Email: {auth.email}</span>
+
+            <button className="navbar-logout" onClick={handleLogout}>
+              Log out
+            </button>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
