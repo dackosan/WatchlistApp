@@ -19,14 +19,14 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-links">
-        <Link to="/movies">Films</Link>
+      <div></div>
 
+      <div className="navbar-center">
+        <Link to="/movies">Films</Link>
         {auth?.token && <Link to="/watchlist">Watchlist</Link>}
       </div>
 
       <div className="navbar-right">
-        {/* NOT LOGGED IN */}
         {!auth?.token && (
           <>
             <Link className="navbar-btn" to="/login">
@@ -38,11 +38,9 @@ export default function Navbar() {
           </>
         )}
 
-        {/* LOGGED IN */}
         {auth?.token && (
           <>
             <span className="navbar-email">Email: {auth.email}</span>
-
             <button className="navbar-logout" onClick={handleLogout}>
               Log out
             </button>

@@ -22,14 +22,11 @@ function App() {
       <ToastContainer />
 
       <Routes>
-        {/* PUBLIC PAGE */}
         <Route path="/movies" element={<MoviesPage />} />
 
-        {/* AUTH PAGES */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* PROTECTED PAGE */}
         <Route
           path="/watchlist"
           element={
@@ -39,7 +36,6 @@ function App() {
           }
         />
 
-        {/* DEFAULT REDIRECT */}
         <Route path="*" element={<Navigate to="/movies" />} />
       </Routes>
     </>
