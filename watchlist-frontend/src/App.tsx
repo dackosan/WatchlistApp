@@ -8,6 +8,7 @@ import WatchlistPage from "./pages/Watchlist";
 import { useContext, type JSX } from "react";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import AddMovie from "./pages/AddMovie";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const auth = useContext(AuthContext);
@@ -35,6 +36,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/add-movie" element={<AddMovie />} />
 
         <Route path="*" element={<Navigate to="/movies" />} />
       </Routes>

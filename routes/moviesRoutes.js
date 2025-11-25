@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
   res.json(movie);
 });
 
-/*router.post("/", (req, res) => {
+router.post("/", (req, res) => {
   const { title, year, genre } = req.body;
 
   if (!title || !year || !genre) {
@@ -31,7 +31,7 @@ router.get("/:id", (req, res) => {
   res.json({ message: "Movie added" });
 });
 
-router.put("/:id", (req, res) => {
+/*router.put("/:id", (req, res) => {
   const { title, year, genre } = req.body;
   const id = req.params.id;
 

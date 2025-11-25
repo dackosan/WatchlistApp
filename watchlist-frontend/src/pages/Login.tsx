@@ -18,7 +18,7 @@ export default function Login() {
       const res = await loginRequest(email, password);
 
       if (auth) {
-        auth.login(res.data.token, res.data.email);
+        auth.login(res.data.token, res.data.email, res.data.role);
       }
 
       toast.success("Successfully logged in!");

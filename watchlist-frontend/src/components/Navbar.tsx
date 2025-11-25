@@ -24,6 +24,11 @@ export default function Navbar() {
       <div className="navbar-center">
         <Link to="/movies">Films</Link>
         {auth?.token && <Link to="/watchlist">Watchlist</Link>}
+        {auth?.role === "admin" && (
+          <Link to="/add-movie">
+            Add Movie
+          </Link>
+        )}
       </div>
 
       <div className="navbar-right">
